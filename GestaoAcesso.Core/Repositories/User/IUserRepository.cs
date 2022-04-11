@@ -9,5 +9,6 @@ namespace GestaoAcesso.Core.Repositories.User
     {
         Task<IdentityResult> CreateUserAsync(IdentityUser<int> usuarioIdentity, string password);
         Task<IdentityUser<int>> GetUserByEmailAsync(string email);
+        Task<string> GenerateEmailConfirmationTokenAsync(IdentityUser<int> usuarioIdentity);
     }
 }

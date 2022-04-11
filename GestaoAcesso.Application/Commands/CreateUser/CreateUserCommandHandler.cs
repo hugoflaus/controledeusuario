@@ -28,7 +28,8 @@ namespace GestaoAcesso.Application.Commands.CreateUser
 
             if (resultado.Succeeded)
             {
-                return Result.Ok();
+                var code = await _userRepository.GenerateEmailConfirmationTokenAsync(usuarioIdentity);
+                return Result.Ok().WithSuccess(code);
             }
 
             return Result.Fail("Falha ao cadastrar usuário");

@@ -20,6 +20,11 @@ namespace GestaoAcesso.Infrastructure.Persistence.Repositories
             return resultIdentity;
         }
 
+        public async Task<string> GenerateEmailConfirmationTokenAsync(IdentityUser<int> usuarioIdentity)
+        {
+            return await _userManager.GenerateEmailConfirmationTokenAsync(usuarioIdentity);
+        }
+
         public async Task<IdentityUser<int>> GetUserByEmailAsync(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);

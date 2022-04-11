@@ -27,7 +27,7 @@ namespace GestaoAcesso.API.Controllers
                 return StatusCode(500);
             }
 
-            return Ok();
+            return Ok(resulado.Successes);
         }
 
     }

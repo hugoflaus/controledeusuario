@@ -43,7 +43,8 @@ namespace GestaoAcesso.API
             services.AddIdentity<IdentityUser<int>, IdentityRole<int>>(
                 opt => opt.SignIn.RequireConfirmedEmail = true
             )
-            .AddEntityFrameworkStores<GestaoAcessoDbContext>();
+            .AddEntityFrameworkStores<GestaoAcessoDbContext>()
+            .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>
             {
