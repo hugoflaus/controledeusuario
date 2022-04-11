@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using FluentResults;
 using GestaoAcesso.Core.Repositories.Login;
 using GestaoAcesso.Core.Repositories.User;
+using GestaoAcesso.Core.Services;
 using MediatR;
 
 namespace GestaoAcesso.Application.Commands.LoginUser
@@ -12,11 +13,13 @@ namespace GestaoAcesso.Application.Commands.LoginUser
     {
         private readonly ILoginUserRepository _loginUserRepository;
         private readonly IUserRepository _userRepository;
+        private readonly IAuthService _authService;
 
-        public LoginUserCommandHandler(ILoginUserRepository loginUserRepository, IUserRepository userRepository)
+        public LoginUserCommandHandler(ILoginUserRepository loginUserRepository, IUserRepository userRepository, IAuthService authService)
         {
             _loginUserRepository = loginUserRepository;
             _userRepository = userRepository;
+            _authService = authService;
         }
         public async Task<Result> Handle(LoginUserCommand request, CancellationToken cancellationToken)
         {
@@ -29,7 +32,9 @@ namespace GestaoAcesso.Application.Commands.LoginUser
             var resultado = await _loginUserRepository.LoginUserAsync(user.UserName, request.Password);
             if (resultado.Succeeded)
             {
-                return Result.Ok();
+                var token = _authService.CreateToken(user);
+
+                return Result.Ok().WithSuccess(token.Value);
             }
 
             return Result.Fail("Login Falhou");

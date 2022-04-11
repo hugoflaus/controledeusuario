@@ -21,10 +21,10 @@ namespace GestaoAcesso.API.Controllers
 
             if (resulado.IsFailed)
             {
-                return Unauthorized();
+                return Unauthorized(resulado.Errors);
             }
 
-            return Ok();
+            return Ok(resulado.Successes);
         }
     }
 }
