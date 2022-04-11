@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GestaoAcesso.Application.Commands.CreateUser;
+using GestaoAcesso.Core.Repositories.Login;
 using GestaoAcesso.Core.Repositories.User;
 using GestaoAcesso.Infrastructure.Persistence;
 using GestaoAcesso.Infrastructure.Persistence.Repositories;
@@ -39,7 +40,15 @@ namespace GestaoAcesso.API
             services.AddIdentity<IdentityUser<int>, IdentityRole<int>>()
                 .AddEntityFrameworkStores<GestaoAcessoDbContext>();
 
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 8;
+            });
+
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ILoginUserRepository, LoginUserRepository>();
 
             services.AddControllers();
 

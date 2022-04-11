@@ -19,5 +19,12 @@ namespace GestaoAcesso.Infrastructure.Persistence.Repositories
             var resultIdentity = await _userManager.CreateAsync(usuarioIdentity, password);
             return resultIdentity;
         }
+
+        public async Task<IdentityUser<int>> GetUserByEmailAsync(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            return user;
+        }
     }
 }
