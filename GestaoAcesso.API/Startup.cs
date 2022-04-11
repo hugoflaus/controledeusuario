@@ -39,8 +39,11 @@ namespace GestaoAcesso.API
 
             var connectionString = Configuration.GetConnectionString("GestaoAcesso");
             services.AddDbContext<GestaoAcessoDbContext>(options => options.UseSqlServer(connectionString));
-            services.AddIdentity<IdentityUser<int>, IdentityRole<int>>()
-                .AddEntityFrameworkStores<GestaoAcessoDbContext>();
+
+            services.AddIdentity<IdentityUser<int>, IdentityRole<int>>(
+                opt => opt.SignIn.RequireConfirmedEmail = true
+            )
+            .AddEntityFrameworkStores<GestaoAcessoDbContext>();
 
             services.Configure<IdentityOptions>(options =>
             {
