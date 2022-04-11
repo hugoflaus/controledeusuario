@@ -1,6 +1,7 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using GestaoAcesso.Application.Commands.ActiveUser;
 using GestaoAcesso.Application.Commands.CreateUser;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -18,7 +19,8 @@ namespace GestaoAcesso.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] CreateUserCommand model)
+        [Route("create")]
+        public async Task<IActionResult> CriarUsuario([FromBody] CreateUserCommand model)
         {
             var resulado = await _mediator.Send(model);
 
@@ -29,6 +31,22 @@ namespace GestaoAcesso.API.Controllers
 
             return Ok(resulado.Successes);
         }
+
+
+        [HttpPost]
+        [Route("active")]
+        public async Task<IActionResult> AtivaContaUsuario([FromBody] ActiveUserCommand model)
+        {
+            var resulado = await _mediator.Send(model);
+
+            if (resulado.IsFailed)
+            {
+                return StatusCode(500);
+            }
+
+            return Ok(resulado.Successes);
+        }
+
 
     }
 }

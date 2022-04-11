@@ -1,8 +1,10 @@
+using System.Linq;
 using System.Threading.Tasks;
 using FluentResults;
 using GestaoAcesso.Core.Entity;
 using GestaoAcesso.Core.Repositories.User;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace GestaoAcesso.Infrastructure.Persistence.Repositories
 {
@@ -14,6 +16,12 @@ namespace GestaoAcesso.Infrastructure.Persistence.Repositories
         {
             _userManager = userManager;
         }
+
+        public async Task<IdentityResult> ActiveUser(IdentityUser<int> usuarioIdentity, string CodigoAtivacao)
+        {
+            return await _userManager.ConfirmEmailAsync(usuarioIdentity, CodigoAtivacao);
+        }
+
         public async Task<IdentityResult> CreateUserAsync(IdentityUser<int> usuarioIdentity, string password)
         {
             var resultIdentity = await _userManager.CreateAsync(usuarioIdentity, password);
@@ -30,6 +38,14 @@ namespace GestaoAcesso.Infrastructure.Persistence.Repositories
             var user = await _userManager.FindByEmailAsync(email);
 
             return user;
+        }
+
+
+        public async Task<IdentityUser<int>> GetUserByIdAsync(int id)
+        {
+            var identityUser = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == id);
+
+            return identityUser;
         }
     }
 }
