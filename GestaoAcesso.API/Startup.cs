@@ -7,6 +7,7 @@ using GestaoAcesso.Core.Repositories.Login;
 using GestaoAcesso.Core.Repositories.User;
 using GestaoAcesso.Core.Services;
 using GestaoAcesso.Infrastructure.AuthServices;
+using GestaoAcesso.Infrastructure.EmailServices;
 using GestaoAcesso.Infrastructure.Persistence;
 using GestaoAcesso.Infrastructure.Persistence.Repositories;
 using MediatR;
@@ -56,6 +57,7 @@ namespace GestaoAcesso.API
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ILoginUserRepository, LoginUserRepository>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IEmailService, EmailService>();
 
             services.AddControllers();
 

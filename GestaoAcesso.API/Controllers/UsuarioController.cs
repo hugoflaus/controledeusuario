@@ -33,9 +33,9 @@ namespace GestaoAcesso.API.Controllers
         }
 
 
-        [HttpPost]
+        [HttpGet]
         [Route("active")]
-        public async Task<IActionResult> AtivaContaUsuario([FromBody] ActiveUserCommand model)
+        public async Task<IActionResult> AtivaContaUsuario([FromQuery] ActiveUserCommand model)
         {
             var resulado = await _mediator.Send(model);
 
