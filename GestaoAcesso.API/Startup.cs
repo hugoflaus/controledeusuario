@@ -41,9 +41,11 @@ namespace GestaoAcesso.API
             var connectionString = Configuration.GetConnectionString("GestaoAcesso");
             services.AddDbContext<GestaoAcessoDbContext>(options => options.UseSqlServer(connectionString));
 
-            services.AddIdentity<IdentityUser<int>, IdentityRole<int>>(
-                opt => opt.SignIn.RequireConfirmedEmail = true
-            )
+            services.AddIdentity<IdentityUser<int>, IdentityRole<int>>(opt =>
+            {
+                opt.SignIn.RequireConfirmedEmail = true;
+                opt.User.RequireUniqueEmail = true;
+            })
             .AddEntityFrameworkStores<GestaoAcessoDbContext>()
             .AddDefaultTokenProviders();
 
