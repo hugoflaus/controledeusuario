@@ -33,6 +33,11 @@ namespace GestaoAcesso.Infrastructure.Persistence.Repositories
             return await _userManager.GenerateEmailConfirmationTokenAsync(usuarioIdentity);
         }
 
+        public async Task<string> GenerateResetToken(IdentityUser<int> usuarioIdentity)
+        {
+            return await _userManager.GeneratePasswordResetTokenAsync(usuarioIdentity);
+        }
+
         public async Task<IdentityUser<int>> GetUserByEmailAsync(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);

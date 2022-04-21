@@ -12,5 +12,6 @@ namespace GestaoAcesso.Core.Repositories.User
         Task<string> GenerateEmailConfirmationTokenAsync(IdentityUser<int> usuarioIdentity);
         Task<IdentityResult> ActiveUser(IdentityUser<int> usuarioIdentity, string CodigoAtivacao);
         Task<IdentityUser<int>> GetUserByIdAsync(int id);
+        Task<string> GenerateResetToken(IdentityUser<int> usuarioIdentity);
     }
 }
