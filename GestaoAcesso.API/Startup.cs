@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GestaoAcesso.Application.Commands.CreateUser;
 using GestaoAcesso.Core.Repositories.Login;
+using GestaoAcesso.Core.Repositories.Roles;
 using GestaoAcesso.Core.Repositories.User;
 using GestaoAcesso.Core.Services;
 using GestaoAcesso.Infrastructure.AuthServices;
@@ -58,6 +59,7 @@ namespace GestaoAcesso.API
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ILoginUserRepository, LoginUserRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IEmailService, EmailService>();
 

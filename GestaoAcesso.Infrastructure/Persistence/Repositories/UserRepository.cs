@@ -11,10 +11,12 @@ namespace GestaoAcesso.Infrastructure.Persistence.Repositories
     public class UserRepository : IUserRepository
     {
         private UserManager<IdentityUser<int>> _userManager;
+        private RoleManager<IdentityRole<int>> _roleManager;
 
-        public UserRepository(UserManager<IdentityUser<int>> userManager)
+        public UserRepository(UserManager<IdentityUser<int>> userManager, RoleManager<IdentityRole<int>> roleManager)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         public async Task<IdentityResult> ActiveUser(IdentityUser<int> usuarioIdentity, string CodigoAtivacao)
@@ -25,6 +27,8 @@ namespace GestaoAcesso.Infrastructure.Persistence.Repositories
         public async Task<IdentityResult> CreateUserAsync(IdentityUser<int> usuarioIdentity, string password)
         {
             var resultIdentity = await _userManager.CreateAsync(usuarioIdentity, password);
+            var createRoleResult = await _roleManager.CreateAsync(new IdentityRole<int>("admin"));
+            var userRoleResult = await _userManager.AddToRoleAsync(usuarioIdentity, "admin");
             return resultIdentity;
         }
 

@@ -6,6 +6,6 @@ namespace GestaoAcesso.Core.Services
 {
     public interface IAuthService
     {
-        Token CreateToken(IdentityUser<int> usuario);
+        Token CreateToken(IdentityUser<int> usuario, string role);
     }
 }
