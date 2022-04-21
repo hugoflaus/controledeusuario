@@ -13,5 +13,6 @@ namespace GestaoAcesso.Core.Repositories.User
         Task<IdentityResult> ActiveUser(IdentityUser<int> usuarioIdentity, string CodigoAtivacao);
         Task<IdentityUser<int>> GetUserByIdAsync(int id);
         Task<string> GenerateResetToken(IdentityUser<int> usuarioIdentity);
+        Task<IdentityResult> ResetPassword(IdentityUser<int> usuarioIdentity, string token, string password);
     }
 }

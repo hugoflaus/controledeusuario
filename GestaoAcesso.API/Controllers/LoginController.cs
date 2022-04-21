@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using GestaoAcesso.Application.Commands.LoginUser;
-using GestaoAcesso.Application.Commands.ResetUserPassword;
+using GestaoAcesso.Application.Commands.RequestPasswordChange;
+using GestaoAcesso.Application.Commands.ResetPassword;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,8 +29,21 @@ namespace GestaoAcesso.API.Controllers
             return Ok(resulado.Successes);
         }
 
-        [HttpPost("reset-password")]
-        public async Task<IActionResult> ResetUserPassword([FromBody] ResetUserPasswordCommand model)
+        [HttpPost("requestpasswordchange")]
+        public async Task<IActionResult> RequestPasswordChange([FromBody] RequestPasswordChangeCommand model)
+        {
+            var resulado = await _mediator.Send(model);
+
+            if (resulado.IsFailed)
+            {
+                return Unauthorized(resulado.Errors);
+            }
+
+            return Ok(resulado.Successes);
+        }
+
+        [HttpPost("resetpassword")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordCommand model)
         {
             var resulado = await _mediator.Send(model);
 

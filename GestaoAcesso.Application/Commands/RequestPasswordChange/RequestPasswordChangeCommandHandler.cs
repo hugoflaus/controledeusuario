@@ -1,21 +1,22 @@
 using System.Threading;
 using System.Threading.Tasks;
 using FluentResults;
+using GestaoAcesso.Application.Commands.RequestPasswordChange;
 using GestaoAcesso.Core.Repositories.User;
 using MediatR;
 
-namespace GestaoAcesso.Application.Commands.ResetUserPassword
+namespace GestaoAcesso.Application.Commands.RequestPasswordChange
 {
-    public class ResetUserPasswordCommandHandler : IRequestHandler<ResetUserPasswordCommand, Result>
+    public class RequestPasswordChangeCommandHandler : IRequestHandler<RequestPasswordChangeCommand, Result>
     {
         private readonly IUserRepository _userRepository;
 
-        public ResetUserPasswordCommandHandler(IUserRepository userRepository)
+        public RequestPasswordChangeCommandHandler(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
 
-        public async Task<Result> Handle(ResetUserPasswordCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(RequestPasswordChangeCommand request, CancellationToken cancellationToken)
         {
             var userIdentity = await _userRepository.GetUserByEmailAsync(request.Email);
 

@@ -52,5 +52,10 @@ namespace GestaoAcesso.Infrastructure.Persistence.Repositories
 
             return identityUser;
         }
+
+        public async Task<IdentityResult> ResetPassword(IdentityUser<int> usuarioIdentity, string token, string password)
+        {
+            return await _userManager.ResetPasswordAsync(usuarioIdentity, token, password);
+        }
     }
 }
