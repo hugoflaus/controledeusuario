@@ -1,5 +1,9 @@
 # Cadastro de Usuários .Net core 5
 Status: Em desenvolvimento
+
+<img src="https://user-images.githubusercontent.com/8002171/164838427-948d7fbf-209a-485d-b968-f1929032ad1e.png"/>
+
+
 ## Descrição do projeto
 ### Projeto criado para cadastro e controle de acesso de usuários.
 #### .Net Core 5.
