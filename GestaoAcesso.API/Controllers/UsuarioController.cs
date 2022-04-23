@@ -20,7 +20,7 @@ namespace GestaoAcesso.API.Controllers
 
         [HttpPost]
         [Route("create")]
-        public async Task<IActionResult> CriarUsuario([FromBody] CreateUserCommand model)
+        public async Task<IActionResult> CreateUserAccount([FromBody] CreateUserCommand model)
         {
             var resulado = await _mediator.Send(model);
 
@@ -33,9 +33,9 @@ namespace GestaoAcesso.API.Controllers
         }
 
 
-        [HttpGet]
+        [HttpPost]
         [Route("active")]
-        public async Task<IActionResult> AtivaContaUsuario([FromQuery] ActiveUserCommand model)
+        public async Task<IActionResult> ActivateUserAccount([FromQuery] ActiveUserCommand model)
         {
             var resulado = await _mediator.Send(model);
 
